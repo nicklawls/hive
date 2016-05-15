@@ -1,0 +1,36 @@
+var _user$project$GameState_Types$Model = function (a) {
+	return {game: a};
+};
+var _user$project$GameState_Types$Game = F6(
+	function (a, b, c, d, e, f) {
+		return {gameBoard: a, gamePlayer: b, gameP1Bugs: c, gameP2Bugs: d, gameP1Placed: e, gameP2Placed: f};
+	});
+var _user$project$GameState_Types$Board = F2(
+	function (a, b) {
+		return {boardTiles: a, boardParity: b};
+	});
+var _user$project$GameState_Types$Tile = F2(
+	function (a, b) {
+		return {tylePlayer: a, tyleBug: b};
+	});
+var _user$project$GameState_Types$GameMessage = function (a) {
+	return {ctor: 'GameMessage', _0: a};
+};
+var _user$project$GameState_Types$BadMessage = function (a) {
+	return {ctor: 'BadMessage', _0: a};
+};
+var _user$project$GameState_Types$GameActive = function (a) {
+	return {ctor: 'GameActive', _0: a};
+};
+var _user$project$GameState_Types$GameOver = function (a) {
+	return {ctor: 'GameOver', _0: a};
+};
+var _user$project$GameState_Types$P2 = {ctor: 'P2'};
+var _user$project$GameState_Types$P1 = {ctor: 'P1'};
+var _user$project$GameState_Types$Odd = {ctor: 'Odd'};
+var _user$project$GameState_Types$Even = {ctor: 'Even'};
+var _user$project$GameState_Types$Queen = {ctor: 'Queen'};
+var _user$project$GameState_Types$Beetle = {ctor: 'Beetle'};
+var _user$project$GameState_Types$Spider = {ctor: 'Spider'};
+var _user$project$GameState_Types$Grasshopper = {ctor: 'Grasshopper'};
+var _user$project$GameState_Types$Ant = {ctor: 'Ant'};

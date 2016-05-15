@@ -1,0 +1,4 @@
+var _user$project$GameState_View$view = function (model) {
+	return _elm_lang$html$Html$text(
+		_elm_lang$core$Basics$toString(model));
+};

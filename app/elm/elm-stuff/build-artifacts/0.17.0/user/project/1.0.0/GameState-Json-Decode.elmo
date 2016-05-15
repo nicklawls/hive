@@ -1,0 +1,113 @@
+var _user$project$GameState_Json_Decode$bug = A2(
+	_elm_lang$core$Json_Decode$customDecoder,
+	_elm_lang$core$Json_Decode$string,
+	function (str) {
+		var _p0 = str;
+		switch (_p0) {
+			case 'Ant':
+				return _elm_lang$core$Result$Ok(_user$project$GameState_Types$Ant);
+			case 'Grasshopper':
+				return _elm_lang$core$Result$Ok(_user$project$GameState_Types$Grasshopper);
+			case 'Spider':
+				return _elm_lang$core$Result$Ok(_user$project$GameState_Types$Spider);
+			case 'Beetle':
+				return _elm_lang$core$Result$Ok(_user$project$GameState_Types$Beetle);
+			case 'Queen':
+				return _elm_lang$core$Result$Ok(_user$project$GameState_Types$Queen);
+			default:
+				return _elm_lang$core$Result$Err(
+					A2(_elm_lang$core$Basics_ops['++'], 'Unknown Bug', str));
+		}
+	});
+var _user$project$GameState_Json_Decode$parity = A2(
+	_elm_lang$core$Json_Decode$customDecoder,
+	_elm_lang$core$Json_Decode$string,
+	function (str) {
+		var _p1 = str;
+		switch (_p1) {
+			case 'Even':
+				return _elm_lang$core$Result$Ok(_user$project$GameState_Types$Even);
+			case 'Odd':
+				return _elm_lang$core$Result$Ok(_user$project$GameState_Types$Odd);
+			default:
+				return _elm_lang$core$Result$Err(
+					A2(_elm_lang$core$Basics_ops['++'], 'Unknown Parity', str));
+		}
+	});
+var _user$project$GameState_Json_Decode$boardIndex = A3(
+	_elm_lang$core$Json_Decode$tuple2,
+	F2(
+		function (v0, v1) {
+			return {ctor: '_Tuple2', _0: v0, _1: v1};
+		}),
+	_elm_lang$core$Json_Decode$int,
+	_elm_lang$core$Json_Decode$int);
+var _user$project$GameState_Json_Decode$player = A2(
+	_elm_lang$core$Json_Decode$customDecoder,
+	_elm_lang$core$Json_Decode$string,
+	function (str) {
+		var _p2 = str;
+		switch (_p2) {
+			case 'P1':
+				return _elm_lang$core$Result$Ok(_user$project$GameState_Types$P1);
+			case 'P2':
+				return _elm_lang$core$Result$Ok(_user$project$GameState_Types$P2);
+			default:
+				return _elm_lang$core$Result$Err(
+					A2(_elm_lang$core$Basics_ops['++'], 'Unknown Player: ', str));
+		}
+	});
+var _user$project$GameState_Json_Decode$tile = A3(
+	_elm_lang$core$Json_Decode$object2,
+	_user$project$GameState_Types$Tile,
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'tilePlayer', _user$project$GameState_Json_Decode$player),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'tileBug', _user$project$GameState_Json_Decode$bug));
+var _user$project$GameState_Json_Decode$cell = _elm_lang$core$Json_Decode$list(_user$project$GameState_Json_Decode$tile);
+var _user$project$GameState_Json_Decode$board = A3(
+	_elm_lang$core$Json_Decode$object2,
+	_user$project$GameState_Types$Board,
+	A2(
+		_elm_lang$core$Json_Decode_ops[':='],
+		'boardTiles',
+		A2(_elm_community$elm_json_extra$Json_Decode_Extra$dict2, _user$project$GameState_Json_Decode$boardIndex, _user$project$GameState_Json_Decode$cell)),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'boardParity', _user$project$GameState_Json_Decode$parity));
+var _user$project$GameState_Json_Decode$game = A7(
+	_elm_lang$core$Json_Decode$object6,
+	_user$project$GameState_Types$Game,
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'gameBoard', _user$project$GameState_Json_Decode$board),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'gamePlayer', _user$project$GameState_Json_Decode$player),
+	A2(
+		_elm_lang$core$Json_Decode_ops[':='],
+		'gameP1Bugs',
+		_elm_lang$core$Json_Decode$list(_user$project$GameState_Json_Decode$bug)),
+	A2(
+		_elm_lang$core$Json_Decode_ops[':='],
+		'gameP2Bugs',
+		_elm_lang$core$Json_Decode$list(_user$project$GameState_Json_Decode$bug)),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'gameP1Placed', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'gameP2Placed', _elm_lang$core$Json_Decode$int));
+var _user$project$GameState_Json_Decode$gameState = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'tag', _elm_lang$core$Json_Decode$string),
+	function (tag) {
+		var _p3 = tag;
+		switch (_p3) {
+			case 'GameOver':
+				return A2(
+					_elm_lang$core$Json_Decode$map,
+					_user$project$GameState_Types$GameOver,
+					A2(
+						_elm_lang$core$Json_Decode_ops[':='],
+						'contents',
+						_elm_lang$core$Json_Decode$maybe(_user$project$GameState_Json_Decode$player)));
+			case 'GameActive':
+				return A2(
+					_elm_lang$core$Json_Decode$map,
+					_user$project$GameState_Types$GameActive,
+					A2(_elm_lang$core$Json_Decode_ops[':='], 'contents', _user$project$GameState_Json_Decode$game));
+			default:
+				return _elm_lang$core$Json_Decode$fail(
+					A2(_elm_lang$core$Basics_ops['++'], 'Unknown GameState', tag));
+		}
+	});
+var _user$project$GameState_Json_Decode$parseGameState = _elm_lang$core$Json_Decode$decodeString(_user$project$GameState_Json_Decode$gameState);

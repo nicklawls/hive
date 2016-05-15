@@ -1,0 +1,44 @@
+var _user$project$Game_Json_Decode$player = A2(
+	_elm_lang$core$Json_Decode$customDecoder,
+	_elm_lang$core$Json_Decode$string,
+	function (str) {
+		var _p0 = str;
+		switch (_p0) {
+			case 'P1':
+				return _elm_lang$core$Result$Ok(_user$project$Game_Types$P1);
+			case 'P2':
+				return _elm_lang$core$Result$Ok(_user$project$Game_Types$P2);
+			default:
+				return _elm_lang$core$Result$Err('Player parse error');
+		}
+	});
+var _user$project$Game_Json_Decode$game = _elm_lang$core$Native_Utils.crash(
+	'Game.Json.Decode',
+	{
+		start: {line: 30, column: 8},
+		end: {line: 30, column: 19}
+	})('yoo');
+var _user$project$Game_Json_Decode$gameState = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'tag', _elm_lang$core$Json_Decode$string),
+	function (tag) {
+		var _p1 = tag;
+		switch (_p1) {
+			case 'GameOver':
+				return A2(
+					_elm_lang$core$Json_Decode$map,
+					_user$project$Game_Types$GameOver,
+					A2(
+						_elm_lang$core$Json_Decode_ops[':='],
+						'contents',
+						_elm_lang$core$Json_Decode$maybe(_user$project$Game_Json_Decode$player)));
+			case 'GameActive':
+				return A2(
+					_elm_lang$core$Json_Decode$map,
+					_user$project$Game_Types$GameActive,
+					A2(_elm_lang$core$Json_Decode_ops[':='], 'contents', _user$project$Game_Json_Decode$game));
+			default:
+				return _elm_lang$core$Json_Decode$fail('unknown game state');
+		}
+	});
+var _user$project$Game_Json_Decode$parseGameState = _elm_lang$core$Json_Decode$decodeString(_user$project$Game_Json_Decode$gameState);

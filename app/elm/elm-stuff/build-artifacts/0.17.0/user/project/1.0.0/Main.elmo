@@ -1,0 +1,9 @@
+var _user$project$Main$main = {
+	main: _elm_lang$html$Html_App$program(
+		{
+			init: {ctor: '_Tuple2', _0: _user$project$GameState_State$initialModel, _1: _elm_lang$core$Platform_Cmd$none},
+			update: _user$project$GameState_State$update,
+			subscriptions: _user$project$GameState_State$gameSocket('ws://localhost:6789'),
+			view: _user$project$GameState_View$view
+		})
+};

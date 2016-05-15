@@ -1,0 +1,17 @@
+var _user$project$Game_Types$Model = function (a) {
+	return {game: a};
+};
+var _user$project$Game_Types$GameMessage = function (a) {
+	return {ctor: 'GameMessage', _0: a};
+};
+var _user$project$Game_Types$BadMessage = function (a) {
+	return {ctor: 'BadMessage', _0: a};
+};
+var _user$project$Game_Types$GameActive = function (a) {
+	return {ctor: 'GameActive', _0: a};
+};
+var _user$project$Game_Types$GameOver = function (a) {
+	return {ctor: 'GameOver', _0: a};
+};
+var _user$project$Game_Types$P2 = {ctor: 'P2'};
+var _user$project$Game_Types$P1 = {ctor: 'P1'};

@@ -1,0 +1,38 @@
+var _user$project$GameState_State$gameSocket = F2(
+	function (url, _p0) {
+		return A2(
+			_elm_lang$websocket$WebSocket$listen,
+			url,
+			function (str) {
+				var _p1 = _user$project$GameState_Json_Decode$parseGameState(str);
+				if (_p1.ctor === 'Err') {
+					return _user$project$GameState_Types$BadMessage(_p1._0);
+				} else {
+					return _user$project$GameState_Types$GameMessage(_p1._0);
+				}
+			});
+	});
+var _user$project$GameState_State$update = F2(
+	function (msg, model) {
+		var _p2 = msg;
+		if (_p2.ctor === 'BadMessage') {
+			return _elm_lang$core$Native_Utils.crashCase(
+				'GameState.State',
+				{
+					start: {line: 14, column: 3},
+					end: {line: 17, column: 75}
+				},
+				_p2)(_p2._0);
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						game: _elm_lang$core$Maybe$Just(_p2._0)
+					}),
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		}
+	});
+var _user$project$GameState_State$initialModel = _user$project$GameState_Types$Model(_elm_lang$core$Maybe$Nothing);
